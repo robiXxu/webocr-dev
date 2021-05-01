@@ -1,0 +1,39 @@
+
+
+- finish PreviewCard
+- add Preview comp - make actionComponent prop
+-- filter images comparing the b64 data returned by FileReader 
+- add PreviewAction comp and pass it to Upload in App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# notes to future me 

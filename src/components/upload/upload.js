@@ -1,4 +1,6 @@
 import { Component, createRef } from "react";
+import Preview from '../preview/preview';
+import PreviewCard from '../previewCard/previewCard';
 import "./upload.css";
 
 class Upload extends Component {
@@ -67,11 +69,9 @@ class Upload extends Component {
             onChange={this.handleFiles}
           />
         </form>
-        {this.state.files.length > 0 && (<div>
-          {this.state.files.map(f => (
-            <img key={f.name} src={f.data} alt={f.name} />
-          ))}
-        </div>)}
+        {this.state.files.length > 0 && (<Preview>
+          {this.state.files.map(f => <PreviewCard key={f.data} {...f} />)}
+        </Preview>)}
       </div>
     );
   };

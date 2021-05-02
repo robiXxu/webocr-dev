@@ -13,30 +13,28 @@ class Upload extends Component {
     this.state = {
       formHighlight: false,
       files: [],
-      previewFiles: [],
     };
   }
 
   loadPreviewFiles = (files) => {
+  };
+
+  handleFiles = (files) => {
     files.forEach((f) => {
       const reader = new FileReader();
       reader.readAsDataURL(f);
       reader.onloadend = () => {
-        this.setState((state) => ({
-          previewFiles: [...state.previewFiles, {
-            name: f.name,
-            data: reader.result
-          }],
-        }));
+        this.setState((state) => {
+          const existsAlready = state.files.find(sf => sf.data === reader.result);
+          return existsAlready ? {} : {
+            files: [...state.files, {
+              name: f.name,
+              data: reader.result
+            }],
+          };
+        });
       };
     });
-  };
-
-  handleFiles = (files) => {
-    this.setState((state) => ({
-      files: [...state.files, ...files],
-    }));
-    this.loadPreviewFiles(files);
   };
 
   render = () => {
@@ -69,8 +67,8 @@ class Upload extends Component {
             onChange={this.handleFiles}
           />
         </form>
-        {this.state.previewFiles.length > 0 && (<div>
-          {this.state.previewFiles.map(f => (
+        {this.state.files.length > 0 && (<div>
+          {this.state.files.map(f => (
             <img key={f.name} src={f.data} alt={f.name} />
           ))}
         </div>)}
